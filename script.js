@@ -1,37 +1,37 @@
 const inputBox = document.getElementById('input-box');
 const listContainer = document.getElementById('list-container');
-//função para adicionar uma nova tarefa 
+//function to add a new activity
 function addTask(){
-    //Checa se tem imputo vazio e da um alerta
+    //Checking if the input is empty and give an alert
     if(inputBox.value.trim() === '') {
         alert('Please enter a task');
 }
 else{
-    //se ouver texto adiciona um novo li na lista
+    //If there is any text it will add a li
     let li = document.createElement('li');
     li.innerText = inputBox.value;
     listContainer.appendChild(li);
-    //cria um span com a imagem de X para tirar a tarefa
+    //Creates a span with the image X to delete activities
     let span = document.createElement('span');
-    span.innerHTML = 'x'; //'<img src="cross-circle.png">';
+    span.innerHTML = 'x';
     li.appendChild(span);
     }
-    //limpa o input
+    //Cleans the input
     inputBox.value = '';
     saveData();
 }
-
+//A function that mark the activities as checked if pressed anywhere in the Li element
 listContainer.addEventListener('click', function(e){
     if(e.target.tagName === 'LI'){
         e.target.classList.toggle('checked');
         saveData();
-    }
+    }//if it is the Span element it understand that needs to delete the element
     else if(e.target.tagName === 'SPAN'){
         e.target.parentElement.remove();
         saveData();
     }
 }, false);
-
+// this is to save the information from the page
 function saveData(){
     localStorage.setItem("data", listContainer.innerHTML);
 }
